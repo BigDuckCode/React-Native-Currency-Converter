@@ -1,0 +1,1325 @@
+import React, { Component } from 'react';
+import { AppRegistry, Text, View, StyleSheet, Image, ScrollView, TextInput, ImageBackground, TouchableHighlight, Alert, Dimensions } from 'react-native';
+import AssetExample from './components/AssetExample';
+
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
+export default class App extends Component {
+    state = {
+        convert: 'flex',
+        settings: 'none',
+        calc: 'none',
+        symbol: '$',
+        currency: 'Dollars',
+        money: '',
+        startCurrency: 'USD',
+        
+        euro: 0,
+        dollar: 0,
+        yen: 0,
+        pound: 0,
+        aud: 0,
+        cad: 0,
+        franc: 0,
+        yuan: 0,
+        hong: 0,
+        zealand: 0,
+        
+        euroConvert: 0.95,
+        dollarConvert: 1,
+        yenConvert: 149.58,
+        poundConvert: 0.82,
+        audConvert: 1.59,
+        cadConvert: 1.36,
+        francConvert: 0.9,
+        yuanConvert: 7.31,
+        hongConvert: 7.82,
+        zealandConvert: 1.69,
+        
+        euroD: 'flex',
+        usdD: 'none',
+        yenD: 'flex',
+        poundD: 'flex',
+        audD: 'flex',
+        cadD: 'flex',
+        francD: 'flex',
+        yuanD: 'flex',
+        hongD: 'flex',
+        zealandD: 'flex',
+        
+        price: '',
+        tip: '',
+        fullPrice: '',
+    }
+    
+    t10 = () => {
+        this.setState({
+            tip: 1.1,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+        {this.round}
+    }
+    t15 = () => {
+        this.setState({
+            tip: 1.15,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+    }
+    t20 = () => {
+        this.setState({
+            tip: 1.2,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+    }
+    t25 = () => {
+        this.setState({
+            tip: 1.25,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+    }
+    t30 = () => {
+        this.setState({
+            tip: 1.3,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+    }
+    t35 = () => {
+        this.setState({
+            tip: 1.35,
+            fullPrice: (Number(this.state.price) * Number(this.state.tip)).toFixed(2),
+        })
+        
+    }
+    
+    plus = () => {
+        this.setState({ 
+            sign: '+',
+            answer: Number(this.state.lNum) + Number(this.state.rNum)
+        })
+    }
+    
+    subtract = () => {
+        this.setState({ 
+            sign: '-',
+            answer: Number(this.state.lNum) - Number(this.state.rNum)
+        })
+    }
+    
+    multiply = () => {
+        this.setState({ 
+            sign: 'X',
+            answer: Number(this.state.lNum) * Number(this.state.rNum)
+        })
+    }
+    
+    divide = () => {
+        this.setState({ 
+            sign: '/',
+            answer: Number(this.state.lNum) / Number(this.state.rNum)
+        })
+    }
+    
+    convertD = (startCurrency) => {
+        this.setState 
+        ({
+            convert: 'flex',
+            settings: 'none',
+            calc: 'none',
+            easyCalcD: 'none',
+        })
+        if (startCurrency == 'usd') {
+            this.setState 
+            ({
+                euroConvert: 0.95,
+                dollarConvert: 1,
+                yenConvert: 149.58,
+                poundConvert: 0.82,
+                audConvert: 1.59,
+                cadConvert: 1.36,
+                francConvert: 0.9,
+                yuanConvert: 7.31,
+                hongConvert: 7.82,
+                zealandConvert: 1.69,
+                symbol: '$',
+                currency: 'U.S. Dollars',
+                euroD: 'flex',
+                usdD: 'none',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'eur') {
+            this.setState 
+            ({
+                euroConvert: 1,
+                dollarConvert: 1.05,
+                yenConvert: 157.77,
+                poundConvert: 0.87,
+                audConvert: 1.66,
+                cadConvert: 1.44,
+                francConvert: 0.95,
+                yuanConvert: 7.72,
+                hongConvert: 8.25,
+                zealandConvert: 1.79,
+                symbol: '€',
+                currency: 'Euros',
+                euroD: 'none',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'jpy') {
+            this.setState 
+            ({
+                euroConvert: 0.0063,
+                dollarConvert: 0.0067,
+                yenConvert: 1,
+                poundConvert: 0.0055,
+                audConvert: 0.011,
+                cadConvert: 0.0091,
+                francConvert: 0.0060,
+                yuanConvert: 0.049,
+                hongConvert: 0.052,
+                zealandConvert: 0.011,
+                symbol: '¥',
+                currency: 'Yen',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'none',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'gbp') {
+            this.setState 
+            ({
+                euroConvert: 1.15,
+                dollarConvert: 1.22,
+                yenConvert: 181.95,
+                poundConvert: 1,
+                audConvert: 1.92,
+                cadConvert: 1.66,
+                francConvert: 1.10,
+                yuanConvert: 8.90,
+                hongConvert: 9.52,
+                zealandConvert: 2.07,
+                symbol: '£',
+                currency: 'Pounds',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'none',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'aud') {
+            this.setState 
+            ({
+                euroConvert: 0.60,
+                dollarConvert: 0.64,
+                yenConvert: 95.04,
+                poundConvert: 0.52,
+                audConvert: 1,
+                cadConvert: 0.87,
+                francConvert: 0.57,
+                yuanConvert: 4.65,
+                hongConvert: 4.97,
+                zealandConvert: 1.08,
+                symbol: '$',
+                currency: 'A. Dollars',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'none',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'cad') {
+            this.setState 
+            ({
+                euroConvert: 0.69,
+                dollarConvert: 0.73,
+                yenConvert: 109.62,
+                poundConvert: 0.60,
+                audConvert: 1.15,
+                cadConvert: 1,
+                francConvert: 0.66,
+                yuanConvert: 5.36,
+                hongConvert: 5.74,
+                zealandConvert: 1.24,
+                symbol: '$',
+                currency: 'C. Dollars',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'none',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'chf') {
+            this.setState 
+            ({
+                euroConvert: 1.05,
+                dollarConvert: 1.11,
+                yenConvert: 166.00,
+                poundConvert: 166.00,
+                audConvert: 1.75,
+                cadConvert: 1.51,
+                francConvert: 1,
+                yuanConvert: 8.12,
+                hongConvert: 8.69,
+                zealandConvert: 1.88,
+                symbol: '₣',
+                currency: 'Francs',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'none',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'cny') {
+            this.setState 
+            ({
+                euroConvert: 0.13,
+                dollarConvert: 0.14,
+                yenConvert: 20.43,
+                poundConvert: 0.11,
+                audConvert: 0.22,
+                cadConvert: 0.19,
+                francConvert: 0.12,
+                yuanConvert: 1,
+                hongConvert: 1.07,
+                zealandConvert: 0.23,
+                symbol: '¥',
+                currency: 'Yuan',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'none',
+                hongD: 'flex',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'hkd') {
+            this.setState 
+            ({
+                euroConvert: 0.12,
+                dollarConvert: 0.13,
+                yenConvert: 19.10,
+                poundConvert: 0.10,
+                audConvert: 0.20,
+                cadConvert: 0.17,
+                francConvert: 0.11,
+                yuanConvert: 0.93,
+                hongConvert: 1,
+                zealandConvert: 0.22,
+                symbol: '$',
+                currency: 'H.K. Dollars',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'none',
+                zealandD: 'flex',
+            })
+        }
+        else if (startCurrency == 'nzd') {
+            this.setState 
+            ({
+                euroConvert: 0.56,
+                dollarConvert: 0.59,
+                yenConvert: 88.18,
+                poundConvert: 0.48,
+                audConvert: 0.93,
+                cadConvert: 0.80,
+                francConvert: 0.53,
+                yuanConvert: 4.32,
+                hongConvert: 4.62,
+                zealandConvert: 1,
+                symbol: '$',
+                currency: 'N.Z. Dollars',
+                euroD: 'flex',
+                usdD: 'flex',
+                yenD: 'flex',
+                poundD: 'flex',
+                audD: 'flex',
+                cadD: 'flex',
+                francD: 'flex',
+                yuanD: 'flex',
+                hongD: 'flex',
+                zealandD: 'none',
+            })
+        }
+    }
+    
+    settingsD = () => 
+        this.setState(state => 
+        ({
+            convert: 'none',
+            settings: 'flex',
+            calc: 'none',
+            easyCalcD: 'none',
+        })
+    )
+    
+    calcD = () => 
+        this.setState(state => 
+        ({
+            convert: 'none',
+            settings: 'none',
+            calc: 'flex',
+            easyCalcD: 'none',
+        })
+    )
+    
+    easyCalcD = () => 
+        this.setState(state => 
+        ({
+            convert: 'none',
+            settings: 'none',
+            calc: 'none',
+            easyCalcD: 'flex',
+        })
+    )
+    
+    
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.titleBox}>
+                    <Text style={styles.title}>
+                        Currency Calculation App
+                    </Text>
+                </View>
+                <View style={styles.separater}>
+                </View>
+                
+                
+                <View style={{display: this.state.convert}}>
+                    <View style={styles.screen}>
+                        
+                        <Text style={styles.descText}>
+                            Insert {this.state.currency}
+                        </Text>
+                        
+                        <View style={{height: deviceHeight * 0.08, width: deviceWidth, flexDirection: 'row', justifyContent: 'center'}}>
+                            <View style={styles.symbolBox}>
+                                <Text style={styles.moneySign}>
+                                    {this.state.symbol}
+                                </Text>
+                            </View>
+                            <View style={styles.inputBox}>
+                                <TextInput style={styles.moneyInput}
+                                    keyboardType = 'numeric'
+                                    onChangeText={(money) => this.setState({
+                                        money: money,
+                                        euro: (money * this.state.euroConvert).toFixed(2),
+                                        dollar: (money * this.state.dollarConvert).toFixed(2),
+                                        yen: (money * this.state.yenConvert).toFixed(0),
+                                        pound: (money * this.state.poundConvert).toFixed(2),
+                                        aud: (money * this.state.audConvert).toFixed(2),
+                                        cad: (money * this.state.cadConvert).toFixed(2),
+                                        franc: (money * this.state.francConvert).toFixed(2),
+                                        yuan: (money * this.state.yuanConvert).toFixed(2),
+                                        hong: (money * this.state.hongConvert).toFixed(3),
+                                        zealand: (money * this.state.zealandConvert).toFixed(2),
+                                    })}
+                                    value={this.state.money}
+                                    placeholder = '0.00'
+                                />
+                            </View>
+                            <View style={styles.symbolBox}>
+                            </View>
+                        </View>
+                        
+                        <ScrollView style={styles.convertBox}>
+                
+                            <View style={{display: this.state.euroD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/548b6e0c9e5ed0a3f04f4abee47c763a' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Euro (EUR)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        €
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.euro}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.usdD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/ff0933b03045554377704d41d38c45f4' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Dollar (USD)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        $
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.dollar}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.yenD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/d56774e25d89ff7fbc70f080c1ea0bc2' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Yen (JPY)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        ¥
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.yen}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.poundD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/e9dd765761e5ac97a992fb91cd5840a9' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Pound (GBP)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        £
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.pound}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.audD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/884d53833f34fa4ce329ec667281940e' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Aus. Dollar (AUD)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        $
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.aud}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.cadD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/e4f3911626a2fd87dbf17f6e0e66a727' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Can. Dollar (CAD)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        $
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.cad}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.francD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/3fd011dd498075a2570ced89f86ebc9f' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Franc (CHF)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        ₣
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.franc}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.yuanD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/ddf1fab37b4daf7b738b2d75fc5c0d32' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Yuan (CNY)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        ¥
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.yuan}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.hongD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/93717b8496c99f9832155ea6a434a5e4' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        Hong Kong Dollar(HKD)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        $
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.hong}
+                                    </Text>
+                                </View>
+                            </View>
+                            
+                            <View style={{display: this.state.zealandD, flexDirection: 'row', height: deviceHeight * 0.08, width: deviceWidth * 0.85, alignItems: 'center'}}>
+                                <View style={styles.moneyFlagBox}>
+                                    <Image
+                                        source={{ uri: 'https://codehs.com/uploads/7065ced996d0446d8841a0a5b02a804c' }}
+                                        style={styles.image}
+                                    />
+                                </View>
+                                <View style={styles.nameBox}>
+                                    <Text style={styles.nameText}>
+                                        New Zeal. Dollar(NZD)
+                                    </Text>
+                                </View>
+                                <View style={styles.moneySymbolBox}>
+                                    <Text style={styles.moneySymbol}>
+                                        $
+                                    </Text>
+                                </View>
+                                <View style={styles.conversionBox}>
+                                    <Text style={styles.conversion}>
+                                        {this.state.zealand}
+                                    </Text>
+                                </View>
+                            </View>
+                        </ScrollView>
+                        
+                    </View>
+                </View>
+                
+                <View style={{display: this.state.easyCalcD}}>
+                    <View style={styles.screen}>
+                        <View style={styles.topBox3}>
+                            <Text style={styles.title3}>
+                                Easy Calculator
+                            </Text>
+                        </View>
+                        <View style={styles.numInputBox3}>
+                            <View style={styles.inputBox3}>
+                                <TextInput style={styles.textInput3}
+                                    keyboardType = 'numeric'
+                                    onChangeText={(lNum) => this.setState({lNum})}
+                                    value={this.state.lNum}
+                                />
+                            </View>
+                            <View style={styles.signBox3}>
+                                <Text style={styles.sign3}>
+                                    {this.state.sign}
+                                </Text>
+                            </View>
+                            <View style={styles.inputBox3}>
+                                <TextInput style={styles.textInput3}
+                                    keyboardType = 'numeric'
+                                    onChangeText={(rNum) => this.setState({rNum})}
+                                    value={this.state.rNum}
+                                />
+                            </View>
+                        
+                        </View>
+                        
+                        <View style={styles.answerBox3}>
+                            <Text style={styles.answerText3}>
+                                Answer: {this.state.answer}
+                            </Text>
+                        </View>
+                        
+                        <View style={styles.instructionBox3}>
+                            <Text style={styles.instructionText3}>
+                                Click operation below to calculate
+                            </Text>
+                        </View>
+                        
+                        <View style={styles.buttonBox3}>
+                            <TouchableHighlight
+                                style={styles.button3}
+                                onPress = {this.plus}
+                            >
+                                <Text style={styles.buttonText3}>
+                                    +
+                                </Text>
+                            </TouchableHighlight>
+                            <View style={styles.midButton3}>
+                            </View>
+                            <TouchableHighlight
+                                style={styles.button3}
+                                onPress = {this.subtract}
+                            >
+                                <Text style={styles.buttonText3}>
+                                    -
+                                </Text>
+                            </TouchableHighlight>
+                        </View>
+                        
+                        <View style={styles.buttonBox3}>
+                            <TouchableHighlight
+                                style={styles.button3}
+                                onPress = {this.multiply}
+                            >
+                                <Text style={styles.buttonText3}>
+                                    X
+                                </Text>
+                            </TouchableHighlight>
+                            <View style={styles.midButton3}>
+                            </View>
+                            <TouchableHighlight
+                                style={styles.button3}
+                                onPress = {this.divide}
+                            >
+                                <Text style={styles.buttonText3}>
+                                    /
+                                </Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </View>
+         
+                
+                <View style={{display: this.state.settings}}>
+                    <View style={styles.screen}>
+                        
+                        <Text style={styles.descText}>
+                            Insert Your Currency
+                        </Text>
+                        
+                        <View style={styles.startingCurrency}>
+                            <TextInput style={styles.moneyInput2}
+                                keyboardType = 'default'
+                                onChangeText={(startCurrency) => this.setState({startCurrency})}
+                                value={this.state.startCurrency}
+                            />
+                        </View>
+                        
+                        <Text style={styles.descText}>
+                            (Example: USD)
+                        </Text>
+                        
+                    </View>
+                </View>
+
+                <View style={{display: this.state.calc}}>
+                    <View style={styles.screen}>
+                        <View style={styles.line}>
+                        </View>
+                        <View style={{backgroundColor: '#476930',width: deviceWidth, height: deviceHeight * 0.13,}}>
+                            <View style={styles.thang}>
+                                <Text style={styles.inputDesc2}>
+                                    Enter Price of Meal
+                                </Text>
+                            </View>
+                            <View style={styles.inputBox2}>
+                                <View style={styles.moneySign2}>
+                                    <Text style={styles.moneySign2}>
+                                        {this.state.symbol}
+                                    </Text>
+                                </View>
+                                <TextInput
+                                    onChangeText={(price) => this.setState({price})}
+                                    value={this.state.price}
+                                    style={styles.textInput2}
+                                    keyboardType = "numeric"
+                                    placeholder = "Enter Cost"
+                                />
+                            </View>
+                        </View>
+                        <View style={styles.line}>
+                        </View>
+                        <View style={{backgroundColor: '#476930', width: deviceWidth, height: deviceHeight * 0.13,}}>
+                            <View style={styles.thang}>
+                                <Text style={styles.inputDesc2}>
+                                    Price of Meal with Tip
+                                </Text>
+                            </View>
+                            <View style={styles.inputBox2}>
+                                <View style={styles.moneySign2}>
+                                    <Text style={styles.moneySign2}>
+                                        {this.state.symbol}
+                                    </Text>
+                                </View>
+                                <ScrollView style={styles.textInput2}>
+                                    <Text style={styles.textInput2}>
+                                        {this.state.fullPrice}
+                                    </Text>
+                                </ScrollView>
+                            </View>
+                        </View>
+                        <View style={styles.line}>
+                        </View>
+                        
+                        <ImageBackground
+                            style={{flex:1}}
+                            source={{ uri: 'https://codehs.com/uploads/1af9cb33b433e1f41943bd1851e93c63' }}
+                        >
+                        
+                            <View style={{width: deviceWidth, height: deviceHeight * 0.035}}>
+                            </View>
+                            <View style={styles.buttonContainer}>
+                                <TouchableHighlight style={styles.button}
+                                onPress = {this.t10}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        10% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.button}
+                                onPress = {this.t15}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        15% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                            </View>
+                            
+                            <View style={styles.buttonContainer}>
+                                <TouchableHighlight style={styles.button}
+                                onPress = {this.t20}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        20% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.button}
+                                onPress = {this.t25}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        25% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                            </View>
+                            
+                            <View style={styles.buttonContainer}>
+                                <TouchableHighlight style={styles.button}
+                               onPress = {this.t30}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        30% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.button}
+                                onPress = {this.t35}
+                                >
+                                    <Text style={styles.buttonText2}>
+                                        35% Tip
+                                    </Text>
+                                </TouchableHighlight>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                </View>
+
+                <View style={styles.separater}>
+                </View>
+                <View style={styles.navBar}>
+                    <TouchableHighlight 
+                        style={styles.buttonBox}
+                        onPress={() => this.convertD(this.state.startCurrency.toLowerCase())}
+                    >
+                        <Text style={styles.buttonText}>
+                            Converter
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight 
+                        style={styles.buttonBox}
+                        onPress={this.calcD}
+                    >
+                        <Text style={styles.buttonText}>
+                            Tip Calc.
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight 
+                        style={styles.buttonBox}
+                        onPress={this.easyCalcD}
+                    >
+                        <Text style={styles.buttonText}>
+                            EasyCalc.
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight 
+                        style={styles.buttonBox}
+                        onPress={this.settingsD}
+                    >
+                        <Text style={styles.buttonText}>
+                            Settings
+                        </Text>
+                    </TouchableHighlight>
+                </View>
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    topBox3: {
+        height: deviceHeight * 0.1,
+        width: deviceWidth,
+        
+    },
+    title3: {
+        fontWeight: 'Bold',
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.06,
+        marginTop: deviceHeight * 0.01,
+    },
+    numInputBox3: {
+        height: deviceHeight * 0.15,
+        width: deviceWidth,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputBox3: {
+        height: deviceWidth * 0.25,
+        width: deviceWidth * 0.25,
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: '#476930',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textInput3: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.05,
+        height: deviceWidth * 0.25,
+        width: deviceWidth * 0.25,
+        
+    },
+    signBox3: {
+        height: deviceWidth * 0.25,
+        width: deviceWidth * 0.1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    sign3: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.05,
+        color: '#082ea1',
+    },
+    answerBox3: {
+        height: deviceWidth * 0.1,
+        width: deviceWidth,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    answerText3: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.05,
+        color: '#476930',
+        height: deviceWidth * 0.3,
+        width: deviceWidth,
+    },
+    instructionBox3: {
+        height: deviceWidth * 0.15,
+        width: deviceWidth,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    instructionText3: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.03,
+    },
+    buttonBox3: {
+        // marginTop: deviceHeight * 0.025,
+        height: deviceWidth * 0.35,
+        width: deviceWidth,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+    },
+    button3: {
+        height: deviceWidth * 0.3,
+        width: deviceWidth * 0.3,
+        backgroundColor: '#86B049',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: deviceWidth * 0.05,
+        borderWidth: 2,
+        borderColor: 'white',
+    },
+    buttonText3: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.06,
+        color: 'white',
+    },
+    startingCurrency: {
+        height: deviceHeight * 0.1,
+        width: deviceWidth * 0.4,
+        backgroundColor: 'white',
+    },
+    moneyInput2: {
+        fontSize: deviceHeight * 0.07,
+        textAlign: 'center',
+    },
+    convertBox:{
+        marginTop: deviceHeight * 0.03,
+        height: deviceHeight * 0.5,
+        width: deviceWidth * 0.9,
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    // currencyBoxEuro: {
+    //     flexDirection: 'row',
+    //     borderRadius: 10,
+    //     height: deviceHeight * 0.08,
+    //     width: deviceWidth * 0.8,
+    //     alignItems: 'center',
+    // },
+    //                      This is in the actual View area not the stylesheet
+    moneyFlagBox: {
+        height: deviceHeight * 0.08,
+        width: deviceWidth * 0.15 - 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#9182f5',
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+    },
+    image: {
+        height: deviceHeight * 0.06,
+        width: deviceHeight * 0.06,
+    },
+    nameBox:{
+        height: deviceHeight * 0.08,
+        width: deviceWidth * 0.35,
+        backgroundColor: '#afa6ed',
+        borderLeftWidth: 2,
+        justifyContent: 'center',
+    },
+    nameText: {
+        fontSize: deviceHeight * 0.035,
+        marginLeft: 2,
+        textAlign: 'center',
+    },
+    moneySymbolBox: {
+        height: deviceHeight * 0.08,
+        width: deviceWidth * 0.06,
+        backgroundColor: '#9182f5',
+        justifyContent: 'center',
+        borderLeftWidth: 2,
+    },
+    moneySymbol: {
+        fontSize: deviceHeight * 0.05,
+        textAlign: 'center',
+    },
+    conversionBox: {
+        height: deviceHeight * 0.08,
+        width: deviceWidth * 0.2975,
+        backgroundColor: '#9182f5',
+        justifyContent: 'center',
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+    },
+    conversion:{
+        fontSize: deviceHeight * 0.03,
+        marginLeft: 2,
+    },
+    
+    descText: {
+        fontSize: deviceHeight * 0.03,
+        color: 'white',
+        margin: deviceHeight * 0.01,
+    },
+    symbolBox: {
+        height: deviceHeight * 0.08, 
+        width: deviceWidth * 0.07,
+        justifyContent: 'center',
+    },
+    inputBox: {
+        height: deviceHeight * 0.08, 
+        width: deviceWidth * 0.5,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+    moneyInput: {
+        marginLeft: deviceWidth * 0.01,
+        color: 'black',
+        fontSize: deviceHeight * 0.045,
+        marginBottom: 3,
+    },
+    moneySign: {
+        fontSize: deviceHeight * 0.055,
+        color: 'white',
+    },
+    container: {
+        height: deviceHeight,
+        width: deviceWidth,
+        backgroundColor: '#C8B88A'
+    },
+    titleBox: {
+        height: deviceHeight * 0.09,
+        width: deviceWidth,
+        backgroundColor: '#476930',
+        justifyContent: 'center'
+    },
+    title: {
+        fontSize: deviceHeight * 0.045,
+        textAlign: 'center',
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    navBar: {
+        height: deviceHeight * 0.09,
+        width: deviceWidth,
+        backgroundColor: '#476930',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+    },
+    buttonBox: {
+        height: deviceHeight * 0.06,
+        width: deviceWidth * 0.22,
+        backgroundColor:'#86B049',//'#C8B88A',
+        justifyContent: 'center',
+        borderColor: 'white',//'#86B049',
+        borderWidth: deviceHeight * 0.005,
+        borderRadius: 5,
+    },
+    buttonText: {
+        textAlign: 'center',
+        fontSize: deviceHeight * 0.024,
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    separater: {
+        height: deviceHeight * 0.01,
+        width: deviceWidth,
+        backgroundColor: '#86B049'
+    },
+    screen: {
+        height: deviceHeight * 0.8,
+        width: deviceWidth,
+        alignItems: 'center',
+    },
+    scoreContainer: {
+        flexDirection: 'row',
+        marginTop: 10,
+    },
+    line: {
+        width: deviceWidth,
+        height: deviceHeight * 0.01,
+        borderTopWidth: deviceHeight * 0.001,
+        borderBottomWidth: deviceHeight * 0.001,
+        backgroundColor: 'white',
+    },
+    thang: {
+        width: deviceWidth,
+        height: deviceHeight * 0.04,
+        marginTop: deviceHeight * 0.005
+    },
+    inputDesc2: {
+        color: 'white',
+        fontSize: deviceHeight * 0.035,
+        textAlign: 'center',
+        textShadowRadius:10,
+    },
+    inputBox2:{ 
+        flexDirection: 'row',
+        justifyContent: 'center', 
+        alignItem: 'center', 
+        width: deviceWidth,
+        height: deviceHeight * 0.08,
+    },
+    moneySign2: {
+        height: deviceHeight * 0.07,
+        width: deviceWidth * 0.1,
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        borderLeftWidth: 2,
+        color: 'black',
+        fontSize: deviceHeight * 0.059,
+        backgroundColor: 'white',
+        textAlign: 'center',
+        //marginRight:1,
+        marginTop:2,
+    },
+    textInput2: {
+        height: deviceHeight * 0.07,
+        width: deviceWidth * 0.5,
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        borderRightWidth: 2,
+        color: 'black',
+        fontSize: deviceHeight * 0.06,
+        backgroundColor: 'white',
+        marginTop:2,
+    },
+    title2: {
+        color: 'white',
+        fontSize: deviceHeight * 0.05,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        textShadowColor: 'black',
+        //textShadowOffset: {width: 2, height: 2},
+        textShadowRadius:10,
+    },
+    titleBox2: {
+        height: deviceHeight * 0.1,
+        width: deviceWidth,
+        backgroundColor: '#476930',
+    },
+    paragraph: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 10,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    button: {
+        height: deviceHeight * 0.1,
+        width: deviceWidth * 0.4,
+        backgroundColor: '#86B049',
+        borderColor: 'white',
+        borderWidth: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+    },
+    buttonText2: {
+        color: 'white',
+        fontSize: deviceHeight * 0.03,
+        textAlign: 'center',
+    },
+});
